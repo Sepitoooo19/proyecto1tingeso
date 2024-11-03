@@ -9,7 +9,7 @@ pipeline{
         stage("Build JAR File"){
             steps{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Sepitoooo19/proyecto1tingeso']])
-                dir("RESPALDO BACKEND"){
+                dir("RESPALDO-BACKEND"){
                     bat "mvn clean package"
                 }
 
@@ -17,7 +17,7 @@ pipeline{
         }
         stage("Test"){
             steps{
-                dir("RESPALDO BACKEND"){
+                dir("RESPALDO-BACKEND"){
                     bat "mvn test"
                 }
             }
@@ -25,7 +25,7 @@ pipeline{
 
         stage("Build and Push Docker Image"){
             steps{
-                dir("RESPALDO BACKEND"){
+                dir("RESPALDO-BACKEND"){
                     script{
                         withDockerRegistry(credentialsId: 'docker-credentials'){
                             bat "docker build -t benjasepulvedaflores/prestabancobackend ."
