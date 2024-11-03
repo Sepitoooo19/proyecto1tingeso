@@ -17,7 +17,7 @@ pipeline{
         }
         stage("Test"){
             steps{
-                dir("proyecto1tingeso"){
+                dir("RESPALDO BACKEND"){
                     bat "mvn test"
                 }
             }
@@ -25,7 +25,7 @@ pipeline{
 
         stage("Buld and Push Docker Image"){
             steps{
-                dir("proyecto1tingeso"){
+                dir("RESPALDO BACKEND"){
                     script{
                         withDockerRegistry(credentialsId: 'docker-credentials'){
                             bat "docker build -t benjasepulvedaflores/prestabancobackend ."
