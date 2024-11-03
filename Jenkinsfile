@@ -23,7 +23,7 @@ pipeline{
             }
         }
 
-        stage("Buld and Push Docker Image"){
+        stage("Build and Push Docker Image"){
             steps{
                 dir("RESPALDO BACKEND"){
                     script{
