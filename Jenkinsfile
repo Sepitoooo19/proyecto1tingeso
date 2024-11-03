@@ -9,7 +9,7 @@ pipeline{
         stage("Build JAR File"){
             steps{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Sepitoooo19/proyecto1tingeso']])
-                dir("proyecto1tingeso"){
+                dir("RESPALDO BACKEND"){
                     bat "mvn clean package"
                 }
 
