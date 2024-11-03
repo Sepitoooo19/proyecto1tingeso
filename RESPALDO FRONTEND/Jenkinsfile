@@ -1,0 +1,26 @@
+pipeline{
+    agent any
+    stages{
+        stage("Build Frontend"){
+            steps{
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Sepitoooo19/proyecto1tingeso']])
+                dir("RESPALDO FRONTEND"){
+                    bat "npm install"
+                    bat "npm run build"
+                }
+            }
+        }
+        stage("Build and Push Docker Image"){
+            steps{
+                dir("RESPALDO FRONTEND"){
+                    script{
+                         withDockerRegistry(credentialsId: 'docker-credentials'){
+                            bat "docker build -t benjasepulvedaflores/prestabancofrontend ."
+                            bat "docker push benjasepulvedaflores/prestabancofrontend"
+                        }
+                    }                    
+                }
+            }
+        }
+    }
+}
