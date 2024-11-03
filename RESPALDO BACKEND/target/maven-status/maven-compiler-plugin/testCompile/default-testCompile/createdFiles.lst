@@ -1,0 +1,7 @@
+com\example\PrestaBanco\services\CreditApplicationServiceTest.class
+com\example\PrestaBanco\services\DocumentServiceTest.class
+com\example\PrestaBanco\services\EmploymentHistoryServiceTest.class
+com\example\PrestaBanco\services\DebtServiceTest.class
+com\example\PrestaBanco\services\BankExecutiveServiceTest.class
+com\example\PrestaBanco\services\ClientServiceTest.class
+com\example\PrestaBanco\services\ClientBankAccountServiceTest.class
