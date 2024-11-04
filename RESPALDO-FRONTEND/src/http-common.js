@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const prestaBancoServer = import.meta.env.VITE_PRESTA_BANCO_BACKEND_SERVER;
-const prestaBancoPort = import.meta.env.VITE_PRESTA_BANCO_BACKEND_PORT;
+const prestaBancoServer = `prestabanco-app.westus2.cloudapp.azure.com`;
+const prestaBancoPort = `80`;
 
 console.log(prestaBancoServer);
 console.log(prestaBancoPort);
