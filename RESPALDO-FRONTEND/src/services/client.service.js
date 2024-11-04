@@ -13,11 +13,11 @@ const get = id => {
 }
 
 const updateById = (id, data) => {
-    return httpClient.put(`http://localhost:8090/api/v1/client/${id}`, data);
+    return httpClient.put(`/api/v1/client/${id}`, data);
 }
 
 const deleteById = id => {
-    return httpClient.delete(`http://localhost:8090/api/v1/client/${id}`);
+    return httpClient.delete(`/api/v1/client/${id}`);
 }
 
 export default { getAll, create, get, updateById, deleteById };
