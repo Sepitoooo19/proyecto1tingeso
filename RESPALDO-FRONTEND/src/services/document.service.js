@@ -1,7 +1,7 @@
 import httpClient from '../http-common';
 
 const getDocumentsByRut = (rut) => {
-    return httpClient.get(`http://prestabanco-app.westus2.cloudapp.azure.com/api/v1/document/client/${rut}/documents`);
+    return httpClient.get(`api/v1/document/client/${rut}/documents`);
 }
 
 const uploadDocument = (file, name, type, rut) => {
@@ -13,7 +13,7 @@ const uploadDocument = (file, name, type, rut) => {
     formData.append("rut", rut);
 
     // Realiza la solicitud POST para subir el documento
-    return httpClient.post(`http://prestabanco-app.westus2.cloudapp.azure.com/api/v1/document/upload`, formData, {
+    return httpClient.post(`api/v1/document/upload`, formData, {
         headers: {
             "Content-Type": "multipart/form-data"
         }
@@ -21,7 +21,7 @@ const uploadDocument = (file, name, type, rut) => {
 };
 
 const downloadDocumentById = (rut, documentId) => {
-    return httpClient.get(`/api/v1/document/client/${rut}/document/${documentId}/download`, {
+    return httpClient.get(`api/v1/document/client/${rut}/document/${documentId}/download`, {
         responseType: 'arraybuffer',
     });
 };
