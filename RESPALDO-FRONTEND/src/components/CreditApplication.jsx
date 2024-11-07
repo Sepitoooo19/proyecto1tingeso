@@ -191,7 +191,7 @@ const CreditApplication = () => {
                         onClick={handleUpload}
                         sx={{ mt: 2 }}
                     >
-                        Subir Documentos
+                        Subir Documentos (Chile)
                     </Button>
                 </Grid>
             )}
