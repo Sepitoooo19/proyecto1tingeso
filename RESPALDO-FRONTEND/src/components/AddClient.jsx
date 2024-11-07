@@ -32,7 +32,7 @@ const AddClient = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validación de campos obligatorios
+    
     if (
       !rut ||
       !name ||
@@ -77,7 +77,7 @@ const AddClient = () => {
       navigate("/client/list");
     } catch (error) {
       console.error("Error adding client:", error);
-      // Aquí puedes agregar lógica para manejar errores, como mostrar un mensaje
+      
     }
   };
 

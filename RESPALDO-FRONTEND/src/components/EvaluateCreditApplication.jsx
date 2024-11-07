@@ -120,11 +120,11 @@ const CreditApplicationById = () => {
             setAgeVerification(response.data);
             
             // Obtener el cliente para calcular la edad final
-            const clientResponse = await bankExecutiveService.getClientByRut(rut); // Asume que tienes un método para obtener el cliente por RUT
+            const clientResponse = await bankExecutiveService.getClientByRut(rut); 
             const client = clientResponse.data;
             const age = client.age;
-            const loanTerm = client.time_limit; // Toma el plazo del préstamo
-            const finalAge = age + loanTerm; // Calcula la edad final
+            const loanTerm = client.time_limit; 
+            const finalAge = age + loanTerm; 
             setFinalAge(finalAge);
             
             setStatus("Verificación de edad realizada con éxito.");
@@ -173,7 +173,7 @@ const CreditApplicationById = () => {
         try {
             const response = await bankExecutiveService.validateBankAccountConsistencyByRut(rut);
     
-            // Almacena el mensaje completo del backend en `consistencyVerification`
+            
             const message = response.data;
             setConsistencyVerification(message); // Guarda el mensaje devuelto
             setStatus("Verificación de consistencia de cuenta realizada con éxito.");
@@ -196,7 +196,7 @@ const CreditApplicationById = () => {
         try {
             const response = await bankExecutiveService.checkPeriodicDeposits(rut);
     
-            // Almacena el mensaje completo del backend en `periodicDeposits`
+            
             const message = response.data;
             setPeriodicDeposits(message); // Guarda el mensaje devuelto
             setStatus("Verificación de depósitos periódicos realizada con éxito.");

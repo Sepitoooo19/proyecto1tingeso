@@ -98,9 +98,9 @@ public class BankExecutiveService {
     public double getDebtAmountByRut(String rut) {
         ClientEntity client = clientRepository.findByRut(rut);
 
-        // Verifica que el cliente no sea nulo
+
         if (client == null || client.getClient_id() == null) {
-            return 0; // Retorna 0 si el cliente no existe
+            return 0;
         }
 
         List<DebtEntity> debts = debtRepository.findByClientId(client.getClient_id());
@@ -117,7 +117,7 @@ public class BankExecutiveService {
         if (client == null) {
             throw new EntityNotFoundException("Cliente no encontrado para el RUT: " + rut);
         }
-        // Código para obtener las deudas basándose en el `client_id` del cliente encontrado
+
         return debtRepository.findByClientId(client.getClient_id());
     }
 
@@ -138,8 +138,6 @@ public class BankExecutiveService {
     }
 
 
-
-    //obtener deposito total en el banco si transaction es deposit
     public int getDepositInBankAccountByRut(String rut) {
         ClientEntity client = clientRepository.findByRut(rut);
         List<ClientBankAccountEntity> clientBankAccounts = clientBankAccountRepository.findByClientId(client.getClient_id());
@@ -152,7 +150,7 @@ public class BankExecutiveService {
         return deposit;
     }
 
-    //obtener retiro total en el banco si transaction es withdrawal
+
     public int getWithdrawalInBankAccountByRut(String rut) {
         ClientEntity client = clientRepository.findByRut(rut);
         List<ClientBankAccountEntity> clientBankAccounts = clientBankAccountRepository.findByClientId(client.getClient_id());
@@ -168,7 +166,7 @@ public class BankExecutiveService {
     public boolean getAgeAndVerifyMaximumAgeByRut(String rut) {
         ClientEntity client = clientRepository.findByRut(rut);
         int age = client.getAge();
-        int loanTerm = client.getTime_limit(); // Suponiendo que el atributo se llama getLoanTerm()
+        int loanTerm = client.getTime_limit();
         int finalAge = age + loanTerm; // Edad del cliente al finalizar el préstamo
 
         // Si la edad actual es menor de 18, no se puede otorgar el préstamo
@@ -192,36 +190,7 @@ public class BankExecutiveService {
 
 
 
-//    public boolean isBankAccountBalanceTenPercentageOfMonthlyFeeByRut(String rut) {
-//        ClientEntity client = clientRepository.findByRut(rut);
-//
-//        // Manejo del caso en que el cliente no existe
-//        if (client == null) {
-//            System.out.println("Cliente no encontrado.");
-//            return false; // No existe cliente
-//        }
-//
-//        List<ClientBankAccountEntity> clientBankAccounts = clientBankAccountRepository.findByClientId(client.getClient_id());
-//
-//
-//        int monthly_fee = getMonthlyLoanOfClientByRut(rut);
-//
-//        // Inicializa el total de depósitos
-//        double totalDeposit = 0.0;
-//
-//        // Calcula el total de depósitos
-//        for (ClientBankAccountEntity clientBankAccount : clientBankAccounts) {
-//            if ("deposit".equals(clientBankAccount.getTransaction())) {
-//                totalDeposit += clientBankAccount.getAmount();
-//            }
-//        }
-//
-//        // Calcula el saldo mínimo requerido
-//        double requiredMinimumBalance = monthly_fee * 0.1;
-//
-//        // Evaluar si el saldo cumple con el mínimo requerido
-//        return totalDeposit >= requiredMinimumBalance;
-//    }
+
 
     private boolean isWithinLast12Months(LocalDate transactionDate) {
         LocalDate twelveMonthsAgo = LocalDate.now().minusMonths(12);
@@ -245,7 +214,7 @@ public class BankExecutiveService {
             } else {
                 totalWithdrawals += clientBankAccount.getAmount();
             }
-            // Suponiendo que tienes una forma de verificar la fecha de las transacciones
+
             if (isWithinLast12Months(clientBankAccount.getTransaction_date())) {
                 totalBalance += clientBankAccount.getAmount();
                 monthCount++;
@@ -336,54 +305,6 @@ public class BankExecutiveService {
     }
 
 
-
-//    public boolean verifyBalanceAndAccountAge(String rut) {
-//        // Obtener todas las cuentas bancarias del cliente
-//        ClientEntity client = clientRepository.findByRut(rut);
-//        long clientId = client.getClient_id();
-//        List<ClientBankAccountEntity> clientBankAccounts = clientBankAccountRepository.findByClientId(clientId);
-//        double loanAmount = getMonthlyLoanOfClientByRut(rut);
-//
-//        // Verificar si hay cuentas bancarias
-//        if (clientBankAccounts.isEmpty()) {
-//            return false; // No hay cuentas bancarias para este cliente
-//        }
-//
-//        // Obtener la fecha actual
-//        LocalDate now = LocalDate.now();
-//
-//        // Variables para almacenar el saldo total y la antigüedad mínima de las cuentas
-//        double totalBalance = 0;
-//        boolean isOlderThanTwoYears = false;
-//
-//        // Recorrer todas las cuentas bancarias del cliente
-//        for (ClientBankAccountEntity account : clientBankAccounts) {
-//            // Sumar el saldo de la cuenta
-//            totalBalance += account.getAmount();
-//
-//            // Calcular la antigüedad de la cuenta
-//            LocalDate accountOpeningDate = account.getAccount_opening();
-//            long yearsWithAccount = ChronoUnit.YEARS.between(accountOpeningDate, now);
-//
-//            // Verificar si alguna cuenta tiene 2 años o más
-//            if (yearsWithAccount >= 2) {
-//                isOlderThanTwoYears = true;
-//            }
-//        }
-//
-//        // Determinar el porcentaje requerido según la antigüedad de la cuenta
-//        double requiredBalance;
-//        if (isOlderThanTwoYears) {
-//            // Si la cuenta tiene 2 años o más, se requiere el 10% del monto del préstamo
-//            requiredBalance = loanAmount * 0.10;
-//        } else {
-//            // Si la cuenta tiene menos de 2 años, se requiere el 20% del monto del préstamo
-//            requiredBalance = loanAmount * 0.20;
-//        }
-//
-//        // Verificar si el saldo total cumple con el saldo requerido
-//        return totalBalance >= requiredBalance;
-//    }
     public boolean checkRecentWithdrawalsByRut(String rut) {
         // Obtener el cliente por su rut
         ClientEntity client = clientRepository.findByRut(rut);
